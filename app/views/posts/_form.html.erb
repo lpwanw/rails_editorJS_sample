@@ -15,7 +15,7 @@
     <div>
       <%= form.label :body, style: "display: block" %>
       <div id="editor"></div>
-      <%= form.hidden_field :body %>
+      <%= form.hidden_field :body, data: { "editor-target" => "body" } %>
     </div>
 
     <div>

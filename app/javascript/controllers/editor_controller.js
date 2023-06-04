@@ -3,6 +3,8 @@ import EditorJS from "@editorjs/editorjs"
 
 // Connects to data-controller="editor"
 export default class extends Controller {
+  static targets = [ "body" ]
+
   connect() {
     this.editor = new EditorJS({
       holder: 'editor',
@@ -15,16 +17,15 @@ export default class extends Controller {
   saveData() {
     this.editor.save().then((outputData) => {
       const data = JSON.stringify(outputData)
-      document.getElementById("post_body").value = data
+      this.bodyTarget.value = data
+      console.log(data)
     }).catch((error) => {
       console.log('Saving failed: ', error)
     });
   }
 
   getInitialContent() {
-    const hiddenContentField = document.getElementById(
-      "post_body"
-    );
+    const hiddenContentField = this.bodyTarget;
     if (hiddenContentField && hiddenContentField.value) {
       return JSON.parse(hiddenContentField.value);
     }
